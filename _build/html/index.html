@@ -49,7 +49,6 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="/user/catalina.villouta//proxy/absolute/8000/index.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Ligo Book for Stat 259" href="intro.html" />
@@ -647,7 +646,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the event properties from a local json file</span>
-<span class="n">fnjson</span> <span class="o">=</span> <span class="s2">&quot;BBH_events_v3.json&quot;</span>
+<span class="n">fnjson</span> <span class="o">=</span> <span class="s2">&quot;data/BBH_events_v3.json&quot;</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">events</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">fnjson</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">))</span>
 <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
@@ -665,22 +664,14 @@
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cannot find resource file BBH_events_v3.json
-You can download it from https://losc.ligo.org/s/events/BBH_events_v3.json
-Quitting.
-You must select an eventname that is in BBH_events_v3.json! Quitting.
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract the parameters for the desired event:</span>
 <span class="n">event</span> <span class="o">=</span> <span class="n">events</span><span class="p">[</span><span class="n">eventname</span><span class="p">]</span>
-<span class="n">fn_H1</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_H1&#39;</span><span class="p">]</span>              <span class="c1"># File name for H1 data</span>
-<span class="n">fn_L1</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_L1&#39;</span><span class="p">]</span>              <span class="c1"># File name for L1 data</span>
-<span class="n">fn_template</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_template&#39;</span><span class="p">]</span>  <span class="c1"># File name for template waveform</span>
+<span class="n">fn_H1</span> <span class="o">=</span> <span class="s2">&quot;data/&quot;</span> <span class="o">+</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_H1&#39;</span><span class="p">]</span>              <span class="c1"># File name for H1 data</span>
+<span class="n">fn_L1</span> <span class="o">=</span> <span class="s2">&quot;data/&quot;</span> <span class="o">+</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_L1&#39;</span><span class="p">]</span>              <span class="c1"># File name for L1 data</span>
+<span class="n">fn_template</span> <span class="o">=</span> <span class="s2">&quot;data/&quot;</span> <span class="o">+</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_template&#39;</span><span class="p">]</span>  <span class="c1"># File name for template waveform</span>
 <span class="n">fs</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fs&#39;</span><span class="p">]</span>                    <span class="c1"># Set sampling rate</span>
 <span class="n">tevent</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;tevent&#39;</span><span class="p">]</span>            <span class="c1"># Set approximate event GPS time</span>
 <span class="n">fband</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fband&#39;</span><span class="p">]</span>              <span class="c1"># frequency band for bandpassing signal</span>
@@ -690,16 +681,8 @@ You must select an eventname that is in BBH_events_v3.json! Quitting.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-4-a7e7482697c9&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Extract the parameters for the desired event:</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">event</span> <span class="o">=</span> <span class="n">events</span><span class="p">[</span><span class="n">eventname</span><span class="p">]</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">fn_H1</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_H1&#39;</span><span class="p">]</span>              <span class="c1"># File name for H1 data</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">fn_L1</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_L1&#39;</span><span class="p">]</span>              <span class="c1"># File name for L1 data</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">fn_template</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_template&#39;</span><span class="p">]</span>  <span class="c1"># File name for template waveform</span>
-
-<span class="ne">NameError</span>: name &#39;events&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reading in parameters for event GW150914
+{u&#39;fband&#39;: [43.0, 300.0], u&#39;approx&#39;: u&#39;lalsim.SEOBNRv2&#39;, u&#39;fs&#39;: 4096, u&#39;name&#39;: u&#39;GW150914&#39;, u&#39;utcevent&#39;: u&#39;2015-09-14T09:50:45.44&#39;, u&#39;fn_H1&#39;: u&#39;H-H1_LOSC_4_V2-1126259446-32.hdf5&#39;, u&#39;a1&#39;: 0.355, u&#39;fn_L1&#39;: u&#39;L-L1_LOSC_4_V2-1126259446-32.hdf5&#39;, u&#39;m1&#39;: 41.743, u&#39;f_min&#39;: 10.0, u&#39;fn_template&#39;: u&#39;GW150914_4_template.hdf5&#39;, u&#39;m2&#39;: 29.237, u&#39;tevent&#39;: 1126259462.44, u&#39;a2&#39;: -0.769}
 </pre></div>
 </div>
 </div>
@@ -732,187 +715,6 @@ You must select an eventname that is in BBH_events_v3.json! Quitting.
 read_hdf5
 loaddata
 read_hdf5
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">strain_H1</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">strain_H1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(numpy.ndarray, 131072)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="nb">isinstance</span><span class="p">(</span><span class="n">time_H1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">time_H1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(True, True)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">fn_H1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>u&#39;H-H1_LOSC_4_V2-1126259446-32.hdf5&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;H-H1_LOSC_4_V2-1126259446-32.hdf5&#39;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">strain</span><span class="p">,</span> <span class="n">gpsStart</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">qmask</span><span class="p">,</span> <span class="n">shortnameList</span><span class="p">,</span> <span class="n">injmask</span><span class="p">,</span> <span class="n">injnameList</span> <span class="o">=</span> <span class="n">rl</span><span class="o">.</span><span class="n">read_hdf5</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-
-<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">strain</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">strain</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span>
-<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gpsStart</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
-<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
-<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">qmask</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">qmask</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span>
-<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">shortnameList</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">shortnameList</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span>
-<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">shortnameList</span><span class="p">:</span>
-    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
-<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">injmask</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">injmask</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span>
-<span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">injnameList</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">injnameList</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span>
-<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">injnameList</span><span class="p">:</span>
-    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>read_hdf5
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1">#import importlib</span>
-<span class="kn">import</span> <span class="nn">ligotools</span>
-<span class="n">reload</span><span class="p">(</span><span class="n">ligotools</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">ligotools</span> <span class="kn">import</span> <span class="n">readligo</span> <span class="k">as</span> <span class="n">rl</span>
-<span class="n">reload</span><span class="p">(</span><span class="n">rl</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;module &#39;ligotools.readligo&#39; from &#39;ligotools/readligo.pyc&#39;&gt;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">eventname</span> <span class="o">=</span> <span class="s1">&#39;GW150914&#39;</span>
-<span class="n">fnjson</span> <span class="o">=</span> <span class="s2">&quot;BBH_events_v3.json&quot;</span>
-<span class="n">events</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">fnjson</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">))</span>
-<span class="n">event</span> <span class="o">=</span> <span class="n">events</span><span class="p">[</span><span class="n">eventname</span><span class="p">]</span>
-<span class="n">fn_H1</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_H1&#39;</span><span class="p">]</span>
-<span class="n">strain_H1</span><span class="p">,</span> <span class="n">time_H1</span><span class="p">,</span> <span class="n">chan_dict_H1</span> <span class="o">=</span> <span class="n">rl</span><span class="o">.</span><span class="n">loaddata</span><span class="p">(</span><span class="n">fn_H1</span><span class="p">,</span> <span class="s1">&#39;H1&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>loaddata
-read_hdf5
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/jovyan/site/lectures/intro-git/hw/hw06-mcvillouta&#39;
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">fn_L1</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_L1&#39;</span><span class="p">]</span>
-<span class="n">strain_L1</span><span class="p">,</span> <span class="n">time_L1</span><span class="p">,</span> <span class="n">chan_dict_L1</span> <span class="o">=</span> <span class="n">rl</span><span class="o">.</span><span class="n">loaddata</span><span class="p">(</span><span class="n">fn_L1</span><span class="p">,</span> <span class="s1">&#39;L1&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>loaddata
-read_hdf5
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ligotools</span> <span class="kn">import</span> <span class="n">getsegs</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">seglist</span> <span class="o">=</span> <span class="n">getsegs</span><span class="p">(</span><span class="mi">842657792</span><span class="p">,</span> <span class="mi">842658792</span><span class="p">,</span> <span class="s1">&#39;H1&#39;</span><span class="p">,</span> <span class="n">flag</span><span class="o">=</span><span class="s1">&#39;DATA&#39;</span><span class="p">,</span> <span class="n">filelist</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using data directory . ...
-WARNING!  No file found for GPS 842657792 and IFO H1
-WARNING! No file found with GPS start time 842657792
-Segment list may contain errors due to missing files.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ligotools</span> <span class="k">as</span> <span class="nn">lg</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">filelist</span> <span class="o">=</span> <span class="n">lg</span><span class="o">.</span><span class="n">FileList</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using data directory . ...
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">filelist</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ligotools.readligo.FileList instance at 0x7fcc45f96eb0&gt;
 </pre></div>
 </div>
 </div>
@@ -986,7 +788,7 @@ For L1, 32 out of 32 seconds contain usable DATA
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1126259462.44
 </pre></div>
 </div>
-<img alt="_images/index_30_1.png" src="_images/index_30_1.png" />
+<img alt="_images/index_16_1.png" src="_images/index_16_1.png" />
 </div>
 </div>
 <p>The data are dominated by <strong>low frequency noise</strong>; there is no way to see a signal here, without some signal processing.</p>
@@ -1042,7 +844,7 @@ For the moment, let’s ignore that, and assume it’s all noise.</p>
   warnings.warn(message, mplDeprecation, stacklevel=1)
 </pre></div>
 </div>
-<img alt="_images/index_33_1.png" src="_images/index_33_1.png" />
+<img alt="_images/index_19_1.png" src="_images/index_19_1.png" />
 </div>
 </div>
 <p>NOTE that we only plot the data between f_min = 20 Hz and f_max = 2000 Hz.</p>
@@ -1156,6 +958,38 @@ Whitening requires no prior knowledge of spectral lines, etc; only the data are 
 <p>We will plot the whitened strain data, along with the signal template, after the matched filtering section, below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">strain_H1</span><span class="p">,</span> <span class="n">time_H1</span><span class="p">,</span> <span class="n">chan_dict_H1</span> <span class="o">=</span> <span class="n">rl</span><span class="o">.</span><span class="n">loaddata</span><span class="p">(</span><span class="n">fn_H1</span><span class="p">,</span> <span class="s1">&#39;H1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>loaddata
+read_hdf5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="mi">4096</span>
+<span class="n">NFFT</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">fs</span>
+<span class="n">Pxx_H1</span><span class="p">,</span> <span class="n">freqs</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">psd</span><span class="p">(</span><span class="n">strain_H1</span><span class="p">,</span> <span class="n">Fs</span> <span class="o">=</span> <span class="n">fs</span><span class="p">,</span> <span class="n">NFFT</span> <span class="o">=</span> <span class="n">NFFT</span><span class="p">)</span>
+<span class="n">psd_H1</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">freqs</span><span class="p">,</span> <span class="n">Pxx_H1</span><span class="p">)</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">time_H1</span>
+<span class="n">dt</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1">#strain_H1, psd_H1, dt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">whiten_data</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">if</span> <span class="n">whiten_data</span><span class="p">:</span>
     <span class="c1"># now whiten the data from H1 and L1, and the template (use H1 PSD):</span>
@@ -1220,8 +1054,8 @@ Whitening requires no prior knowledge of spectral lines, etc; only the data are 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/index_41_0.png" src="_images/index_41_0.png" />
-<img alt="_images/index_41_1.png" src="_images/index_41_1.png" />
+<img alt="_images/index_30_0.png" src="_images/index_30_0.png" />
+<img alt="_images/index_30_1.png" src="_images/index_30_1.png" />
 </div>
 </div>
 <p>In the above spectrograms, you may see lots of excess power below ~20 Hz, as well as strong spectral lines at 500, 1000, 1500 Hz (also evident in the ASDs above). The lines at multiples of 500 Hz are the harmonics of the “violin modes” of the fibers holding up the mirrors of the Advanced LIGO interferometers.</p>
@@ -1264,8 +1098,8 @@ Whitening requires no prior knowledge of spectral lines, etc; only the data are 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/index_43_0.png" src="_images/index_43_0.png" />
-<img alt="_images/index_43_1.png" src="_images/index_43_1.png" />
+<img alt="_images/index_32_0.png" src="_images/index_32_0.png" />
+<img alt="_images/index_32_1.png" src="_images/index_32_1.png" />
 </div>
 </div>
 <p>Loud (high SNR) signals may be visible in these spectrograms.  Compact object mergers show a characteristic “chirp” as the signal rises in frequency.  If you can’t see anything, try
@@ -1397,7 +1231,7 @@ Whitening requires no prior knowledge of spectral lines, etc; only the data are 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Properties of waveform template in GW150914_4_template.hdf5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Properties of waveform template in data/GW150914_4_template.hdf5
 Waveform family = lalsim.SEOBNRv2
 Masses = 41.74, 29.24 Msun
 Mtot = 70.98 Msun, mfinal = 67.43 Msun 
@@ -1410,7 +1244,7 @@ v/c at peak = 0.57
 Radius of final BH = 199 km
 </pre></div>
 </div>
-<img alt="_images/index_47_1.png" src="_images/index_47_1.png" />
+<img alt="_images/index_36_1.png" src="_images/index_36_1.png" />
 </div>
 </div>
 </div>
@@ -1506,11 +1340,11 @@ The LIGO Scientific Collaboration, the Virgo Collaboration, <a class="reference 
     <span class="c1"># apply time offset, phase, and d_eff to template </span>
     <span class="n">template_phaseshifted</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">template</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">phase</span><span class="p">))</span>    <span class="c1"># phase shift the template</span>
     <span class="n">template_rolled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">template_phaseshifted</span><span class="p">,</span><span class="n">offset</span><span class="p">)</span> <span class="o">/</span> <span class="n">d_eff</span>  <span class="c1"># Apply time offset and scale amplitude</span>
-    
+
     <span class="c1"># Whiten and band-pass the template for plotting</span>
-    <span class="n">template_whitened</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">whiten</span><span class="p">(</span><span class="n">template_rolled</span><span class="p">,</span><span class="n">interp1d</span><span class="p">(</span><span class="n">freqs</span><span class="p">,</span> <span class="n">data_psd</span><span class="p">),</span><span class="n">dt</span><span class="p">)</span>  <span class="c1"># whiten the template</span>
+    <span class="n">template_whitened</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">whiten</span><span class="p">(</span><span class="n">template_rolled</span><span class="p">,</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">freqs</span><span class="p">,</span> <span class="n">data_psd</span><span class="p">),</span> <span class="n">dt</span><span class="p">)</span>  <span class="c1"># whiten the template</span>
     <span class="n">template_match</span> <span class="o">=</span> <span class="n">filtfilt</span><span class="p">(</span><span class="n">bb</span><span class="p">,</span> <span class="n">ab</span><span class="p">,</span> <span class="n">template_whitened</span><span class="p">)</span> <span class="o">/</span> <span class="n">normalization</span> <span class="c1"># Band-pass the template</span>
-    
+
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;For detector </span><span class="si">{0}</span><span class="s1">, maximum at </span><span class="si">{1:.4f}</span><span class="s1"> with SNR = </span><span class="si">{2:.1f}</span><span class="s1">, D_eff = </span><span class="si">{3:.2f}</span><span class="s1">, horizon = </span><span class="si">{4:0.1f}</span><span class="s1"> Mpc&#39;</span> 
           <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">det</span><span class="p">,</span><span class="n">timemax</span><span class="p">,</span><span class="n">SNRmax</span><span class="p">,</span><span class="n">d_eff</span><span class="p">,</span><span class="n">horizon</span><span class="p">))</span>
 
@@ -1526,23 +1360,24 @@ The LIGO Scientific Collaboration, the Virgo Collaboration, <a class="reference 
             <span class="n">strain_whitenbp</span> <span class="o">=</span> <span class="n">strain_H1_whitenbp</span>
             <span class="n">template_H1</span> <span class="o">=</span> <span class="n">template_match</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-        <span class="c1"># -- Plot the result</span>
-        <span class="n">ut</span><span class="o">.</span><span class="n">make_figures</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">timemax</span><span class="p">,</span> <span class="n">SNR</span><span class="p">,</span> <span class="n">det</span><span class="p">,</span> <span class="n">strain_whitenbp</span><span class="p">,</span> <span class="n">template_match</span><span class="p">,</span> 
-                        <span class="n">tevent</span><span class="p">,</span> <span class="n">template_fft</span><span class="p">,</span> <span class="n">d_eff</span><span class="p">,</span> <span class="n">data_psd</span><span class="p">,</span> <span class="n">freqs</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">datafreq</span><span class="p">,</span> <span class="n">pcolor</span><span class="p">,</span> <span class="n">plottype</span><span class="p">)</span>
+        <span class="n">ut</span><span class="o">.</span><span class="n">make_figures</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">timemax</span><span class="p">,</span> <span class="n">SNR</span><span class="p">,</span> <span class="n">pcolor</span><span class="p">,</span> <span class="n">det</span><span class="p">,</span> <span class="n">tevent</span><span class="p">,</span> <span class="n">strain_whitenbp</span><span class="p">,</span> <span class="n">template_match</span><span class="p">,</span>
+                        <span class="n">template_fft</span><span class="p">,</span> <span class="n">datafreq</span><span class="p">,</span> <span class="n">d_eff</span><span class="p">,</span> <span class="n">freqs</span><span class="p">,</span> <span class="n">data_psd</span><span class="p">,</span> <span class="n">fs</span><span class="p">,</span> <span class="n">plottype</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For detector H1, maximum at 1126259462.4395 with SNR = 18.6, D_eff = 814.44, horizon = 1889.6 Mpc
-For detector L1, maximum at 1126259462.4324 with SNR = 13.2, D_eff = 999.74, horizon = 1650.6 Mpc
 </pre></div>
 </div>
-<img alt="_images/index_49_1.png" src="_images/index_49_1.png" />
-<img alt="_images/index_49_2.png" src="_images/index_49_2.png" />
-<img alt="_images/index_49_3.png" src="_images/index_49_3.png" />
-<img alt="_images/index_49_4.png" src="_images/index_49_4.png" />
-<img alt="_images/index_49_5.png" src="_images/index_49_5.png" />
-<img alt="_images/index_49_6.png" src="_images/index_49_6.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For detector L1, maximum at 1126259462.4324 with SNR = 13.2, D_eff = 999.74, horizon = 1650.6 Mpc
+</pre></div>
+</div>
+<img alt="_images/index_38_2.png" src="_images/index_38_2.png" />
+<img alt="_images/index_38_3.png" src="_images/index_38_3.png" />
+<img alt="_images/index_38_4.png" src="_images/index_38_4.png" />
+<img alt="_images/index_38_5.png" src="_images/index_38_5.png" />
+<img alt="_images/index_38_6.png" src="_images/index_38_6.png" />
+<img alt="_images/index_38_7.png" src="_images/index_38_7.png" />
 </div>
 </div>
 <div class="section" id="notes-on-these-results">
@@ -1807,7 +1642,7 @@ DATA
       <span class="n">template_H1</span><span class="p">[</span><span class="n">irange</span><span class="p">],</span><span class="n">template_L1</span><span class="p">[</span><span class="n">irange</span><span class="p">]</span> <span class="p">]</span>
 <span class="n">datcsv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dat</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
 <span class="c1"># make a csv filename, header, and format</span>
-<span class="n">fncsv</span> <span class="o">=</span> <span class="s1">&#39;data/eventname&#39;</span><span class="o">+</span><span class="s1">&#39;_data.csv&#39;</span>
+<span class="n">fncsv</span> <span class="o">=</span> <span class="s1">&#39;tables/eventname&#39;</span><span class="o">+</span><span class="s1">&#39;_data.csv&#39;</span>
 <span class="n">headcsv</span> <span class="o">=</span> <span class="n">eventname</span><span class="o">+</span><span class="s1">&#39; time-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">tevent</span><span class="p">)</span><span class="o">+</span> \
     <span class="s1">&#39; (s),H1_data_whitened,L1_data_whitened,H1_template_whitened,L1_template_whitened&#39;</span>
 <span class="n">fmtcsv</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;</span><span class="si">%10.6f</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
@@ -1819,8 +1654,40 @@ DATA
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wrote whitened data to file data/eventname_data.csv
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wrote whitened data to file tables/eventname_data.csv
 You can download this file by clicking &#39;jupyter&#39; in the top left corner, or using the &#39;data&#39; menu in Azure.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">whiten</span><span class="p">(</span><span class="n">strain</span><span class="p">,</span> <span class="n">interp_psd</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
+    <span class="n">Nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">strain</span><span class="p">)</span>
+    <span class="n">freqs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfftfreq</span><span class="p">(</span><span class="n">Nt</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
+    <span class="n">freqs1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">2048.</span><span class="p">,</span><span class="n">Nt</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># whitening: transform to freq domain, divide by asd, then transform back, </span>
+    <span class="c1"># taking care to get normalization right.</span>
+    <span class="n">hf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">strain</span><span class="p">)</span>
+    <span class="n">norm</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">white_hf</span> <span class="o">=</span> <span class="n">hf</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">interp_psd</span><span class="p">(</span><span class="n">freqs</span><span class="p">))</span> <span class="o">*</span> <span class="n">norm</span>
+    <span class="n">white_ht</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfft</span><span class="p">(</span><span class="n">white_hf</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">Nt</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">white_ht</span>
+
+<span class="c1"># function that shifts frequency of a band-passed signal</span>
+<span class="k">def</span> <span class="nf">reqshift</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">fshift</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">sample_rate</span><span class="o">=</span><span class="mi">4096</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;Frequency shift the signal by constant</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+	<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+	<span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">sample_rate</span><span class="p">)</span>
+	<span class="n">df</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">T</span>
+	<span class="n">nbins</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fshift</span><span class="o">/</span><span class="n">df</span><span class="p">)</span>
+	<span class="c1"># print T,df,nbins,x.real.shape</span>
+	<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="n">nbins</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span><span class="n">nbins</span><span class="p">)</span>
+	<span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">nbins</span><span class="p">]</span><span class="o">=</span><span class="mf">0.</span>
+	<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">z</span>
 </pre></div>
 </div>
 </div>
