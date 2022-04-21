@@ -1,0 +1,13 @@
+README.md
+setup.cfg
+setup.py
+ligotools/__init__.py
+ligotools/readligo.py
+ligotools/utils.py
+ligotools.egg-info/PKG-INFO
+ligotools.egg-info/SOURCES.txt
+ligotools.egg-info/dependency_links.txt
+ligotools.egg-info/requires.txt
+ligotools.egg-info/top_level.txt
+ligotools/tests/__init__.py
+ligotools/tests/test_readligo.py
