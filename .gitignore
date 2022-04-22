@@ -1,4 +1,3 @@
 # Distribution / packaging
 
-*.egg-info
-_build
+*.egg-info/
