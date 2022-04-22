@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BINARY BLACK HOLE SIGNALS IN LIGO OPEN DATA &#8212; Ligo Homework</title>
+    <title>BINARY BLACK HOLE SIGNALS IN LIGO OPEN DATA &#8212; Ligo Open Data</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -51,7 +51,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Ligo Book for Stat 259" href="intro.html" />
+    <link rel="prev" title="Fine-tuning reproduciblity of LIGO Black Hole signal tutorial, Part II" href="README.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -80,7 +80,7 @@
       <img src="_static/universe.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">Ligo Homework</h1>
+      <h1 class="site-logo" id="site-title">Ligo Open Data</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -90,8 +90,8 @@
     <div class="bd-toc-item active">
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="intro.html">
-   Ligo Book for Stat 259
+  <a class="reference internal" href="README.html">
+   Fine-tuning reproduciblity of LIGO Black Hole signal tutorial, Part II
   </a>
  </li>
 </ul>
@@ -163,13 +163,10 @@
         aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
     <div class="dropdown-buttons sourcebuttons">
         <a class="repository-button"
-            href="https://github.com/executablebooks/jupyter-book"><button type="button" class="btn btn-secondary topbarbtn"
+            href="https://github.com/UCB-stat-159-s22/hw06-mcvillouta"><button type="button" class="btn btn-secondary topbarbtn"
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
-        <a class="issues-button"
-            href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Findex.html&body=Your%20issue%20content%20here."><button
-                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
-                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
         
     </div>
 </div>
@@ -188,7 +185,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/index.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/UCB-stat-159-s22/hw06-mcvillouta/main?urlpath=tree/index.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="_static/images/logo_binder.svg"
@@ -515,7 +512,8 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="binary-black-hole-signals-in-ligo-open-data">
+  <p><strong>Note:</strong> This repository is public so that Binder can find it. All code and data is based on the original <a class="reference external" href="https://github.com/losc-tutorial/LOSC_Event_tutorial">LIGO Center for Open Science Tutorial Repository</a>. This repository is a class exercise that restructures the original LIGO code for improved reproducibility, as a homework assignment for the <a class="reference external" href="https://ucb-stat-159-s22.github.io">Spring 2022 installment of UC Berkeley’s Stat 159/259 course, <em>Reproducible and Collaborative Data Science</em></a>. Authorship of the original analysis code rests with the LIGO collaboration.</p>
+<div class="tex2jax_ignore mathjax_ignore section" id="binary-black-hole-signals-in-ligo-open-data">
 <h1>BINARY BLACK HOLE SIGNALS IN LIGO OPEN DATA<a class="headerlink" href="#binary-black-hole-signals-in-ligo-open-data" title="Permalink to this headline">¶</a></h1>
 <p>Version 1.63, 2017 Sept 11</p>
 <p>Welcome! This IPython notebook (or associated python script LOSC_Event_tutorial.py ) will go through some typical signal processing tasks on strain time-series data associated with the LIGO Event data releases from the LIGO Open Science Center (LOSC):</p>
@@ -788,7 +786,7 @@ For L1, 32 out of 32 seconds contain usable DATA
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1126259462.44
 </pre></div>
 </div>
-<img alt="_images/index_16_1.png" src="_images/index_16_1.png" />
+<img alt="_images/index_17_1.png" src="_images/index_17_1.png" />
 </div>
 </div>
 <p>The data are dominated by <strong>low frequency noise</strong>; there is no way to see a signal here, without some signal processing.</p>
@@ -844,7 +842,7 @@ For the moment, let’s ignore that, and assume it’s all noise.</p>
   warnings.warn(message, mplDeprecation, stacklevel=1)
 </pre></div>
 </div>
-<img alt="_images/index_19_1.png" src="_images/index_19_1.png" />
+<img alt="_images/index_20_1.png" src="_images/index_20_1.png" />
 </div>
 </div>
 <p>NOTE that we only plot the data between f_min = 20 Hz and f_max = 2000 Hz.</p>
@@ -1054,8 +1052,8 @@ read_hdf5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/index_30_0.png" src="_images/index_30_0.png" />
-<img alt="_images/index_30_1.png" src="_images/index_30_1.png" />
+<img alt="_images/index_31_0.png" src="_images/index_31_0.png" />
+<img alt="_images/index_31_1.png" src="_images/index_31_1.png" />
 </div>
 </div>
 <p>In the above spectrograms, you may see lots of excess power below ~20 Hz, as well as strong spectral lines at 500, 1000, 1500 Hz (also evident in the ASDs above). The lines at multiples of 500 Hz are the harmonics of the “violin modes” of the fibers holding up the mirrors of the Advanced LIGO interferometers.</p>
@@ -1098,8 +1096,8 @@ read_hdf5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/index_32_0.png" src="_images/index_32_0.png" />
-<img alt="_images/index_32_1.png" src="_images/index_32_1.png" />
+<img alt="_images/index_33_0.png" src="_images/index_33_0.png" />
+<img alt="_images/index_33_1.png" src="_images/index_33_1.png" />
 </div>
 </div>
 <p>Loud (high SNR) signals may be visible in these spectrograms.  Compact object mergers show a characteristic “chirp” as the signal rises in frequency.  If you can’t see anything, try
@@ -1244,7 +1242,7 @@ v/c at peak = 0.57
 Radius of final BH = 199 km
 </pre></div>
 </div>
-<img alt="_images/index_36_1.png" src="_images/index_36_1.png" />
+<img alt="_images/index_37_1.png" src="_images/index_37_1.png" />
 </div>
 </div>
 </div>
@@ -1372,12 +1370,12 @@ The LIGO Scientific Collaboration, the Virgo Collaboration, <a class="reference 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For detector L1, maximum at 1126259462.4324 with SNR = 13.2, D_eff = 999.74, horizon = 1650.6 Mpc
 </pre></div>
 </div>
-<img alt="_images/index_38_2.png" src="_images/index_38_2.png" />
-<img alt="_images/index_38_3.png" src="_images/index_38_3.png" />
-<img alt="_images/index_38_4.png" src="_images/index_38_4.png" />
-<img alt="_images/index_38_5.png" src="_images/index_38_5.png" />
-<img alt="_images/index_38_6.png" src="_images/index_38_6.png" />
-<img alt="_images/index_38_7.png" src="_images/index_38_7.png" />
+<img alt="_images/index_39_2.png" src="_images/index_39_2.png" />
+<img alt="_images/index_39_3.png" src="_images/index_39_3.png" />
+<img alt="_images/index_39_4.png" src="_images/index_39_4.png" />
+<img alt="_images/index_39_5.png" src="_images/index_39_5.png" />
+<img alt="_images/index_39_6.png" src="_images/index_39_6.png" />
+<img alt="_images/index_39_7.png" src="_images/index_39_7.png" />
 </div>
 </div>
 <div class="section" id="notes-on-these-results">
@@ -1720,11 +1718,11 @@ You can download this file by clicking &#39;jupyter&#39; in the top left corner,
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="README.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Ligo Book for Stat 259</p>
+            <p class="prev-next-title">Fine-tuning reproduciblity of LIGO Black Hole signal tutorial, Part II</p>
         </div>
     </a>
 </div>
