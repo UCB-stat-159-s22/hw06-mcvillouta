@@ -1,16 +1,16 @@
 import os
-import json
 import pytest
 import numpy as np
 from ligotools import readligo as rl 
-from ligotools import conftest as cf
+from ligotools.tests import conftest as cf
 
 
 
-def test_read_hdf5_H1():
-
-	filename = u'H-H1_LOSC_4_V2-1126259446-32.hdf5'
-	file_path = cf.join_repo_path(filename)
+@pytest.mark.parametrize('file_code', ['H1', 'L1'])
+def test_read_hdf5(file_code):
+	
+	filename = f"{file_code[0]}-{file_code}_LOSC_4_V2-1126259446-32.hdf5"
+	file_path = cf.join_data_path(filename)
 	strain, gpsStart, ts, qmask, shortnameList, injmask, injnameList = rl.read_hdf5(file_path)
 	
 	assert isinstance(strain, np.ndarray) and len(strain)>0
@@ -22,12 +22,12 @@ def test_read_hdf5_H1():
 	assert isinstance(injnameList, list) and len(injnameList)>0
 
 
-@pytest.mark.parametrize('strain_time_chan', ['H1', 'L1'], indirect=True)
-def test_loaddata(strain_time_chan):
+@pytest.mark.parametrize('file_code', ['H1', 'L1'])
+def test_loaddata(various_ligotools_objects):
 	
 	# strain_time_chan is a fixture with the result of loaddata
 	# It is defined in conftest.py
-	strain, time, chan_dict = strain_time_chan
+	event, strain, time, chan_dict, fs, NFFT, freqs, dt, strain_whiten = various_ligotools_objects
 	
 	# Validations
 	assert isinstance(strain, np.ndarray)
@@ -39,7 +39,7 @@ def test_loaddata(strain_time_chan):
 		assert len(val) > 0
 
 def test_filelist():
-	file_list = rl.FileList(repo_path)
+	file_list = rl.FileList(cf.data_path())
 	file_paths = file_list.searchdir(file_list.directory)
-	assert file_list.directory == repo_path
+	assert file_list.directory == cf.data_path()
 	assert len(file_paths) > 0

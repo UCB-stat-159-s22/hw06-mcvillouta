@@ -3,7 +3,7 @@ CSV_FILES = $(wildcard tables/*.csv)
 WAV_FILES = $(wildcard audio/*.wav)
 
 #Build Jupyter Book
-html:
+html: 
 	jupyter-book build .
 
 conf.py: _config.yml _toc.yml

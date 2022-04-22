@@ -165,8 +165,6 @@ def loaddata(filename, ifo=None, tvec=True, readstrain=True):
     CHANNEL_DICT is a dictionary of data quality channels    
     """
     
-    print("loaddata")
-    
     # -- Check for zero length file
     if os.stat(filename).st_size == 0:
         return None, None, None
