@@ -513,8 +513,7 @@
             
               <div>
                 
-  <p><strong>Note:</strong> This repository is public so that Binder can find it. All code and data is based on the original <a class="reference external" href="https://github.com/losc-tutorial/LOSC_Event_tutorial">LIGO Center for Open Science Tutorial Repository</a>. This repository is a class exercise that restructures the original LIGO code for improved reproducibility, as a homework assignment for the <a class="reference external" href="https://ucb-stat-159-s22.github.io">Spring 2022 installment of UC Berkeley’s Stat 159/259 course, <em>Reproducible and Collaborative Data Science</em></a>. Authorship of the original analysis code rests with the LIGO collaboration.</p>
-<div class="tex2jax_ignore mathjax_ignore section" id="binary-black-hole-signals-in-ligo-open-data">
+  <div class="tex2jax_ignore mathjax_ignore section" id="binary-black-hole-signals-in-ligo-open-data">
 <h1>BINARY BLACK HOLE SIGNALS IN LIGO OPEN DATA<a class="headerlink" href="#binary-black-hole-signals-in-ligo-open-data" title="Permalink to this headline">¶</a></h1>
 <p>Version 1.63, 2017 Sept 11</p>
 <p>Welcome! This IPython notebook (or associated python script LOSC_Event_tutorial.py ) will go through some typical signal processing tasks on strain time-series data associated with the LIGO Event data releases from the LIGO Open Science Center (LOSC):</p>
@@ -618,6 +617,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Standard python numerical analysis imports:</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">signal</span>
 <span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp1d</span>
@@ -645,7 +645,8 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read the event properties from a local json file</span>
-<span class="n">fnjson</span> <span class="o">=</span> <span class="s2">&quot;data/BBH_events_v3.json&quot;</span>
+<span class="n">data_folder</span> <span class="o">=</span> <span class="s2">&quot;data&quot;</span>
+<span class="n">fnjson</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="s2">&quot;BBH_events_v3.json&quot;</span><span class="p">)</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">events</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">fnjson</span><span class="p">,</span><span class="s2">&quot;r&quot;</span><span class="p">))</span>
 <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
@@ -668,9 +669,9 @@
 <div class="cell_input docutils container">
 <div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Extract the parameters for the desired event:</span>
 <span class="n">event</span> <span class="o">=</span> <span class="n">events</span><span class="p">[</span><span class="n">eventname</span><span class="p">]</span>
-<span class="n">fn_H1</span> <span class="o">=</span> <span class="s2">&quot;data/&quot;</span> <span class="o">+</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_H1&#39;</span><span class="p">]</span>              <span class="c1"># File name for H1 data</span>
-<span class="n">fn_L1</span> <span class="o">=</span> <span class="s2">&quot;data/&quot;</span> <span class="o">+</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_L1&#39;</span><span class="p">]</span>              <span class="c1"># File name for L1 data</span>
-<span class="n">fn_template</span> <span class="o">=</span> <span class="s2">&quot;data/&quot;</span> <span class="o">+</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_template&#39;</span><span class="p">]</span>  <span class="c1"># File name for template waveform</span>
+<span class="n">fn_H1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_H1&#39;</span><span class="p">])</span>              <span class="c1"># File name for H1 data</span>
+<span class="n">fn_L1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_L1&#39;</span><span class="p">])</span>              <span class="c1"># File name for L1 data</span>
+<span class="n">fn_template</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fn_template&#39;</span><span class="p">])</span>  <span class="c1"># File name for template waveform</span>
 <span class="n">fs</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fs&#39;</span><span class="p">]</span>                    <span class="c1"># Set sampling rate</span>
 <span class="n">tevent</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;tevent&#39;</span><span class="p">]</span>            <span class="c1"># Set approximate event GPS time</span>
 <span class="n">fband</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;fband&#39;</span><span class="p">]</span>              <span class="c1"># frequency band for bandpassing signal</span>
@@ -686,11 +687,36 @@
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">fband</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[43.0, 300.0]
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div class="section" id="read-in-the-data">
 <h2>Read in the data<a class="headerlink" href="#read-in-the-data" title="Permalink to this headline">¶</a></h2>
 <p>We will make use of the data, and waveform template, defined above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">fn_H1</span><span class="p">,</span> <span class="n">fn_L1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(u&#39;data/H-H1_LOSC_4_V2-1126259446-32.hdf5&#39;,
+ u&#39;data/L-L1_LOSC_4_V2-1126259446-32.hdf5&#39;)
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1">#----------------------------------------------------------------</span>
@@ -710,9 +736,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>loaddata
-read_hdf5
-loaddata
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>read_hdf5
 read_hdf5
 </pre></div>
 </div>
@@ -787,7 +811,7 @@ For L1, 32 out of 32 seconds contain usable DATA
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1126259462.44
 </pre></div>
 </div>
-<img alt="_images/index_17_1.png" src="_images/index_17_1.png" />
+<img alt="_images/index_18_1.png" src="_images/index_18_1.png" />
 </div>
 </div>
 <p>The data are dominated by <strong>low frequency noise</strong>; there is no way to see a signal here, without some signal processing.</p>
@@ -843,7 +867,7 @@ For the moment, let’s ignore that, and assume it’s all noise.</p>
   warnings.warn(message, mplDeprecation, stacklevel=1)
 </pre></div>
 </div>
-<img alt="_images/index_20_1.png" src="_images/index_20_1.png" />
+<img alt="_images/index_21_1.png" src="_images/index_21_1.png" />
 </div>
 </div>
 <p>NOTE that we only plot the data between f_min = 20 Hz and f_max = 2000 Hz.</p>
@@ -962,8 +986,7 @@ Whitening requires no prior knowledge of spectral lines, etc; only the data are 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>loaddata
-read_hdf5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>read_hdf5
 </pre></div>
 </div>
 </div>
@@ -1053,8 +1076,8 @@ read_hdf5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/index_31_0.png" src="_images/index_31_0.png" />
-<img alt="_images/index_31_1.png" src="_images/index_31_1.png" />
+<img alt="_images/index_32_0.png" src="_images/index_32_0.png" />
+<img alt="_images/index_32_1.png" src="_images/index_32_1.png" />
 </div>
 </div>
 <p>In the above spectrograms, you may see lots of excess power below ~20 Hz, as well as strong spectral lines at 500, 1000, 1500 Hz (also evident in the ASDs above). The lines at multiples of 500 Hz are the harmonics of the “violin modes” of the fibers holding up the mirrors of the Advanced LIGO interferometers.</p>
@@ -1097,8 +1120,8 @@ read_hdf5
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/index_33_0.png" src="_images/index_33_0.png" />
-<img alt="_images/index_33_1.png" src="_images/index_33_1.png" />
+<img alt="_images/index_34_0.png" src="_images/index_34_0.png" />
+<img alt="_images/index_34_1.png" src="_images/index_34_1.png" />
 </div>
 </div>
 <p>Loud (high SNR) signals may be visible in these spectrograms.  Compact object mergers show a characteristic “chirp” as the signal rises in frequency.  If you can’t see anything, try
@@ -1243,7 +1266,7 @@ v/c at peak = 0.57
 Radius of final BH = 199 km
 </pre></div>
 </div>
-<img alt="_images/index_37_1.png" src="_images/index_37_1.png" />
+<img alt="_images/index_38_1.png" src="_images/index_38_1.png" />
 </div>
 </div>
 </div>
@@ -1261,6 +1284,18 @@ B. Allen et al., PHYSICAL REVIEW D 85, 122006 (2012) ; <a class="reference exter
 <p>The full search procedure is described in
 GW150914: First results from the search for binary black hole coalescence with Advanced LIGO,
 The LIGO Scientific Collaboration, the Virgo Collaboration, <a class="reference external" href="http://arxiv.org/abs/1602.03839">http://arxiv.org/abs/1602.03839</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy.float64
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># -- To calculate the PSD of the data, choose an overlap and a window (common to all detectors)</span>
@@ -1371,12 +1406,12 @@ The LIGO Scientific Collaboration, the Virgo Collaboration, <a class="reference 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For detector L1, maximum at 1126259462.4324 with SNR = 13.2, D_eff = 999.74, horizon = 1650.6 Mpc
 </pre></div>
 </div>
-<img alt="_images/index_39_2.png" src="_images/index_39_2.png" />
-<img alt="_images/index_39_3.png" src="_images/index_39_3.png" />
-<img alt="_images/index_39_4.png" src="_images/index_39_4.png" />
-<img alt="_images/index_39_5.png" src="_images/index_39_5.png" />
-<img alt="_images/index_39_6.png" src="_images/index_39_6.png" />
-<img alt="_images/index_39_7.png" src="_images/index_39_7.png" />
+<img alt="_images/index_41_2.png" src="_images/index_41_2.png" />
+<img alt="_images/index_41_3.png" src="_images/index_41_3.png" />
+<img alt="_images/index_41_4.png" src="_images/index_41_4.png" />
+<img alt="_images/index_41_5.png" src="_images/index_41_5.png" />
+<img alt="_images/index_41_6.png" src="_images/index_41_6.png" />
+<img alt="_images/index_41_7.png" src="_images/index_41_7.png" />
 </div>
 </div>
 <div class="section" id="notes-on-these-results">
@@ -1582,8 +1617,7 @@ this is the “audio” equivalent of the enhanced visuals that NASA employs on 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>loaddata
-read_hdf5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>read_hdf5
 Contents of all the key, value pairs in chan_dict
 NO_BURST_HW_INJ
 [1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]
