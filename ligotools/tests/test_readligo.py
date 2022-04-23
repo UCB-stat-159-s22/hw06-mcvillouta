@@ -23,23 +23,24 @@ def test_read_hdf5(file_code):
 
 
 @pytest.mark.parametrize('file_code', ['H1', 'L1'])
-def test_loaddata(various_ligotools_objects):
+def test_loaddata(get_various_ligotools_objects, file_code):
 	
-	# strain_time_chan is a fixture with the result of loaddata
-	# It is defined in conftest.py
-	event, strain, time, chan_dict, fs, NFFT, freqs, dt, strain_whiten = various_ligotools_objects
-	
+	# get_various_ligotools_objects is a fixture defined in conftest
+	loaddata_objects, whiten_objects, plot_objects = get_various_ligotools_objects(file_code)
+	event, strain, time, chan_dict = loaddata_objects
+
 	# Validations
-	assert isinstance(strain, np.ndarray)
-	assert len(strain) > 0
-	assert isinstance(chan_dict, dict)
-	assert len(chan_dict) > 0
+	assert isinstance(strain, np.ndarray) and len(strain) > 0
+	assert isinstance(chan_dict, dict) and len(chan_dict) > 0
 	for val in chan_dict.values():
 		assert isinstance(val, np.ndarray)
 		assert len(val) > 0
 
 def test_filelist():
 	file_list = rl.FileList(cf.data_path())
-	file_paths = file_list.searchdir(file_list.directory)
 	assert file_list.directory == cf.data_path()
-	assert len(file_paths) > 0
+
+def test_searchdir():
+	file_list = rl.FileList(cf.data_path())
+	file_paths = file_list.searchdir(file_list.directory)
+	assert len(file_paths) > 0	
