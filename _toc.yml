@@ -4,6 +4,6 @@
 format: jb-book
 root: README
 parts:
-- caption: Ligo
+- caption: Ligo Notebook
   chapters:
   - file: index
