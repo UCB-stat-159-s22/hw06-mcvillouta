@@ -37,19 +37,20 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="/user/catalina.villouta//proxy/absolute/8000/index.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Fine-tuning reproduciblity of LIGO Black Hole signal tutorial, Part II" href="README.html" />
@@ -98,7 +99,7 @@
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Ligo
+  Ligo Notebook
  </span>
 </p>
 <ul class="current nav bd-sidenav">
@@ -687,36 +688,11 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">fband</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[43.0, 300.0]
-</pre></div>
-</div>
-</div>
-</div>
 </div>
 </div>
 <div class="section" id="read-in-the-data">
 <h2>Read in the data<a class="headerlink" href="#read-in-the-data" title="Permalink to this headline">¶</a></h2>
 <p>We will make use of the data, and waveform template, defined above.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">fn_H1</span><span class="p">,</span> <span class="n">fn_L1</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(u&#39;data/H-H1_LOSC_4_V2-1126259446-32.hdf5&#39;,
- u&#39;data/L-L1_LOSC_4_V2-1126259446-32.hdf5&#39;)
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1">#----------------------------------------------------------------</span>
@@ -811,7 +787,7 @@ For L1, 32 out of 32 seconds contain usable DATA
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1126259462.44
 </pre></div>
 </div>
-<img alt="_images/index_18_1.png" src="_images/index_18_1.png" />
+<img alt="_images/index_16_1.png" src="_images/index_16_1.png" />
 </div>
 </div>
 <p>The data are dominated by <strong>low frequency noise</strong>; there is no way to see a signal here, without some signal processing.</p>
@@ -867,7 +843,7 @@ For the moment, let’s ignore that, and assume it’s all noise.</p>
   warnings.warn(message, mplDeprecation, stacklevel=1)
 </pre></div>
 </div>
-<img alt="_images/index_21_1.png" src="_images/index_21_1.png" />
+<img alt="_images/index_19_1.png" src="_images/index_19_1.png" />
 </div>
 </div>
 <p>NOTE that we only plot the data between f_min = 20 Hz and f_max = 2000 Hz.</p>
@@ -981,37 +957,6 @@ Whitening requires no prior knowledge of spectral lines, etc; only the data are 
 <p>We will plot the whitened strain data, along with the signal template, after the matched filtering section, below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">strain_H1</span><span class="p">,</span> <span class="n">time_H1</span><span class="p">,</span> <span class="n">chan_dict_H1</span> <span class="o">=</span> <span class="n">rl</span><span class="o">.</span><span class="n">loaddata</span><span class="p">(</span><span class="n">fn_H1</span><span class="p">,</span> <span class="s1">&#39;H1&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>read_hdf5
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="mi">4096</span>
-<span class="n">NFFT</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">fs</span>
-<span class="n">Pxx_H1</span><span class="p">,</span> <span class="n">freqs</span> <span class="o">=</span> <span class="n">mlab</span><span class="o">.</span><span class="n">psd</span><span class="p">(</span><span class="n">strain_H1</span><span class="p">,</span> <span class="n">Fs</span> <span class="o">=</span> <span class="n">fs</span><span class="p">,</span> <span class="n">NFFT</span> <span class="o">=</span> <span class="n">NFFT</span><span class="p">)</span>
-<span class="n">psd_H1</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">freqs</span><span class="p">,</span> <span class="n">Pxx_H1</span><span class="p">)</span>
-<span class="n">time</span> <span class="o">=</span> <span class="n">time_H1</span>
-<span class="n">dt</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1">#strain_H1, psd_H1, dt</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="n">whiten_data</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">if</span> <span class="n">whiten_data</span><span class="p">:</span>
     <span class="c1"># now whiten the data from H1 and L1, and the template (use H1 PSD):</span>
@@ -1076,8 +1021,8 @@ Whitening requires no prior knowledge of spectral lines, etc; only the data are 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/index_32_0.png" src="_images/index_32_0.png" />
-<img alt="_images/index_32_1.png" src="_images/index_32_1.png" />
+<img alt="_images/index_27_0.png" src="_images/index_27_0.png" />
+<img alt="_images/index_27_1.png" src="_images/index_27_1.png" />
 </div>
 </div>
 <p>In the above spectrograms, you may see lots of excess power below ~20 Hz, as well as strong spectral lines at 500, 1000, 1500 Hz (also evident in the ASDs above). The lines at multiples of 500 Hz are the harmonics of the “violin modes” of the fibers holding up the mirrors of the Advanced LIGO interferometers.</p>
@@ -1120,8 +1065,8 @@ Whitening requires no prior knowledge of spectral lines, etc; only the data are 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/index_34_0.png" src="_images/index_34_0.png" />
-<img alt="_images/index_34_1.png" src="_images/index_34_1.png" />
+<img alt="_images/index_29_0.png" src="_images/index_29_0.png" />
+<img alt="_images/index_29_1.png" src="_images/index_29_1.png" />
 </div>
 </div>
 <p>Loud (high SNR) signals may be visible in these spectrograms.  Compact object mergers show a characteristic “chirp” as the signal rises in frequency.  If you can’t see anything, try
@@ -1266,7 +1211,7 @@ v/c at peak = 0.57
 Radius of final BH = 199 km
 </pre></div>
 </div>
-<img alt="_images/index_38_1.png" src="_images/index_38_1.png" />
+<img alt="_images/index_33_1.png" src="_images/index_33_1.png" />
 </div>
 </div>
 </div>
@@ -1284,18 +1229,6 @@ B. Allen et al., PHYSICAL REVIEW D 85, 122006 (2012) ; <a class="reference exter
 <p>The full search procedure is described in
 GW150914: First results from the search for binary black hole coalescence with Advanced LIGO,
 The LIGO Scientific Collaboration, the Virgo Collaboration, <a class="reference external" href="http://arxiv.org/abs/1602.03839">http://arxiv.org/abs/1602.03839</a></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy.float64
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="c1"># -- To calculate the PSD of the data, choose an overlap and a window (common to all detectors)</span>
@@ -1401,17 +1334,15 @@ The LIGO Scientific Collaboration, the Virgo Collaboration, <a class="reference 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For detector H1, maximum at 1126259462.4395 with SNR = 18.6, D_eff = 814.44, horizon = 1889.6 Mpc
+For detector L1, maximum at 1126259462.4324 with SNR = 13.2, D_eff = 999.74, horizon = 1650.6 Mpc
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>For detector L1, maximum at 1126259462.4324 with SNR = 13.2, D_eff = 999.74, horizon = 1650.6 Mpc
-</pre></div>
-</div>
-<img alt="_images/index_41_2.png" src="_images/index_41_2.png" />
-<img alt="_images/index_41_3.png" src="_images/index_41_3.png" />
-<img alt="_images/index_41_4.png" src="_images/index_41_4.png" />
-<img alt="_images/index_41_5.png" src="_images/index_41_5.png" />
-<img alt="_images/index_41_6.png" src="_images/index_41_6.png" />
-<img alt="_images/index_41_7.png" src="_images/index_41_7.png" />
+<img alt="_images/index_35_1.png" src="_images/index_35_1.png" />
+<img alt="_images/index_35_2.png" src="_images/index_35_2.png" />
+<img alt="_images/index_35_3.png" src="_images/index_35_3.png" />
+<img alt="_images/index_35_4.png" src="_images/index_35_4.png" />
+<img alt="_images/index_35_5.png" src="_images/index_35_5.png" />
+<img alt="_images/index_35_6.png" src="_images/index_35_6.png" />
 </div>
 </div>
 <div class="section" id="notes-on-these-results">
@@ -1689,38 +1620,6 @@ DATA
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wrote whitened data to file tables/eventname_data.csv
 You can download this file by clicking &#39;jupyter&#39; in the top left corner, or using the &#39;data&#39; menu in Azure.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython2 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">whiten</span><span class="p">(</span><span class="n">strain</span><span class="p">,</span> <span class="n">interp_psd</span><span class="p">,</span> <span class="n">dt</span><span class="p">):</span>
-    <span class="n">Nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">strain</span><span class="p">)</span>
-    <span class="n">freqs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfftfreq</span><span class="p">(</span><span class="n">Nt</span><span class="p">,</span> <span class="n">dt</span><span class="p">)</span>
-    <span class="n">freqs1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">2048.</span><span class="p">,</span><span class="n">Nt</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-
-    <span class="c1"># whitening: transform to freq domain, divide by asd, then transform back, </span>
-    <span class="c1"># taking care to get normalization right.</span>
-    <span class="n">hf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">strain</span><span class="p">)</span>
-    <span class="n">norm</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="p">(</span><span class="n">dt</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span>
-    <span class="n">white_hf</span> <span class="o">=</span> <span class="n">hf</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">interp_psd</span><span class="p">(</span><span class="n">freqs</span><span class="p">))</span> <span class="o">*</span> <span class="n">norm</span>
-    <span class="n">white_ht</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfft</span><span class="p">(</span><span class="n">white_hf</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">Nt</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">white_ht</span>
-
-<span class="c1"># function that shifts frequency of a band-passed signal</span>
-<span class="k">def</span> <span class="nf">reqshift</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">fshift</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">sample_rate</span><span class="o">=</span><span class="mi">4096</span><span class="p">):</span>
-	<span class="sd">&quot;&quot;&quot;Frequency shift the signal by constant</span>
-<span class="sd">	&quot;&quot;&quot;</span>
-	<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">rfft</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-	<span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">sample_rate</span><span class="p">)</span>
-	<span class="n">df</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">T</span>
-	<span class="n">nbins</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">fshift</span><span class="o">/</span><span class="n">df</span><span class="p">)</span>
-	<span class="c1"># print T,df,nbins,x.real.shape</span>
-	<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="n">nbins</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span><span class="n">nbins</span><span class="p">)</span>
-	<span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">nbins</span><span class="p">]</span><span class="o">=</span><span class="mf">0.</span>
-	<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">irfft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-	<span class="k">return</span> <span class="n">z</span>
 </pre></div>
 </div>
 </div>
