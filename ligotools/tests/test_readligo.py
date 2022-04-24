@@ -9,7 +9,7 @@ from ligotools.tests import conftest as cf
 @pytest.mark.parametrize('file_code', ['H1', 'L1'])
 def test_read_hdf5(file_code):
 	
-	filename = f"{file_code[0]}-{file_code}_LOSC_4_V2-1126259446-32.hdf5"
+	filename = "{0}-{1}_LOSC_4_V2-1126259446-32.hdf5".format(file_code[0], file_code)
 	file_path = cf.join_data_path(filename)
 	strain, gpsStart, ts, qmask, shortnameList, injmask, injnameList = rl.read_hdf5(file_path)
 	

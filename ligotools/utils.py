@@ -1,5 +1,7 @@
 
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 from scipy import signal
@@ -48,7 +50,7 @@ def make_figures(time, timemax, SNR, pcolor, det, tevent, strain_whitenbp, templ
 	plt.subplot(2,1,1)
 	plt.plot(time-timemax, SNR, pcolor, label=det+' SNR(t)')
 	#plt.ylim([0,25.])
-	plt.grid('on')
+	plt.grid(True)
 	plt.ylabel('SNR')
 	plt.xlabel('Time since {0:.4f}'.format(timemax))
 	plt.legend(loc='upper left')
@@ -57,11 +59,11 @@ def make_figures(time, timemax, SNR, pcolor, det, tevent, strain_whitenbp, templ
 	# zoom in
 	plt.subplot(2,1,2)
 	plt.plot(time-timemax, SNR, pcolor,label=det+' SNR(t)')
-	plt.grid('on')
+	plt.grid(True)
 	plt.ylabel('SNR')
 	plt.xlim([-0.15,0.05])
 	#plt.xlim([-0.3,+0.3])
-	plt.grid('on')
+	plt.grid(True)
 	plt.xlabel('Time since {0:.4f}'.format(timemax))
 	plt.legend(loc='upper left')
 	plt.savefig('figures/eventname'+"_"+det+"_SNR."+plottype)
@@ -72,7 +74,7 @@ def make_figures(time, timemax, SNR, pcolor, det, tevent, strain_whitenbp, templ
 	plt.plot(time-tevent,template_match,'k',label='Template(t)')
 	plt.ylim([-10,10])
 	plt.xlim([-0.15,0.05])
-	plt.grid('on')
+	plt.grid(True)
 	plt.xlabel('Time since {0:.4f}'.format(timemax))
 	plt.ylabel('whitened strain (units of noise stdev)')
 	plt.legend(loc='upper left')
@@ -82,7 +84,7 @@ def make_figures(time, timemax, SNR, pcolor, det, tevent, strain_whitenbp, templ
 	plt.plot(time-tevent,strain_whitenbp-template_match,pcolor,label=det+' resid')
 	plt.ylim([-10,10])
 	plt.xlim([-0.15,0.05])
-	plt.grid('on')
+	plt.grid(True)
 	plt.xlabel('Time since {0:.4f}'.format(timemax))
 	plt.ylabel('whitened strain (units of noise stdev)')
 	plt.legend(loc='upper left')

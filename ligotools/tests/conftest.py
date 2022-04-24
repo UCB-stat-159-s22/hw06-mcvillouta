@@ -29,14 +29,14 @@ def join_data_path(filename):
 
 def get_figures_path(file_code):
 	figures_path = os.path.join(repo_path(), "figures")
-	fn_plot1 = os.path.join(figures_path, f"eventname_{file_code}_SNR.png")
-	fn_plot2 = os.path.join(figures_path, f"eventname_{file_code}_matchtime.png")
-	fn_plot3 = os.path.join(figures_path, f"eventname_{file_code}_matchfreq.png")
+	fn_plot1 = os.path.join(figures_path, "eventname_{}_SNR.png".format(file_code))
+	fn_plot2 = os.path.join(figures_path, "eventname_{}_matchtime.png".format(file_code))
+	fn_plot3 = os.path.join(figures_path, "eventname_{}_matchfreq.png".format(file_code))
 	return fn_plot1, fn_plot2, fn_plot3
 
 
 def get_wav_path(file_code):
-	wav_path = f"audio/eventname_{file_code}_whitenbp.wav"	
+	wav_path = "audio/eventname_{}_whitenbp.wav".format(file_code)
 	return wav_path
 
 
@@ -55,7 +55,7 @@ def get_various_ligotools_objects():
 		"""
 			file_code in ['H1', 'L1']
 		"""
-		filename = event[f'fn_{file_code}']
+		filename = event['fn_' + file_code]
 		file_path = join_data_path(filename)	
 
 		# Load data
