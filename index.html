@@ -449,7 +449,7 @@ const thebe_selector_output = ".output, .cell_output"
   <div class="tex2jax_ignore mathjax_ignore section" id="binary-black-hole-signals-in-ligo-open-data">
 <h1>BINARY BLACK HOLE SIGNALS IN LIGO OPEN DATA<a class="headerlink" href="#binary-black-hole-signals-in-ligo-open-data" title="Permalink to this headline">¶</a></h1>
 <p>Version 1.63, 2017 Sept 11</p>
-<p>Welcome!! This IPython notebook (or associated python script LOSC_Event_tutorial.py ) will go through some typical signal processing tasks on strain time-series data associated with the LIGO Event data releases from the LIGO Open Science Center (LOSC):</p>
+<p>Welcome! This IPython notebook (or associated python script LOSC_Event_tutorial.py ) will go through some typical signal processing tasks on strain time-series data associated with the LIGO Event data releases from the LIGO Open Science Center (LOSC):</p>
 <ul class="simple">
 <li><p>Find events at <a class="reference external" href="https://losc.ligo.org/events/">https://losc.ligo.org/events/</a>.</p></li>
 <li><p>View the tutorial as a <a href='https://losc.ligo.org/s/events/GW150914/LOSC_Event_tutorial_GW150914.html'>web page, for GW150914</a>.</p></li>
@@ -552,15 +552,16 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="kn">import</span> <span class="nn">h5py</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
+<span class="c1"># LIGO-specific readligo.py </span>
+<span class="kn">from</span> <span class="nn">ligotools</span> <span class="kn">import</span> <span class="n">readligo</span> <span class="k">as</span> <span class="n">rl</span>
+<span class="kn">from</span> <span class="nn">ligotools</span> <span class="kn">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">ut</span>
+
 <span class="c1"># the IPython magic below must be commented out in the .py file, since it doesn&#39;t work there.</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib.mlab</span> <span class="k">as</span> <span class="nn">mlab</span>
 
-<span class="c1"># LIGO-specific readligo.py </span>
-<span class="kn">from</span> <span class="nn">ligotools</span> <span class="kn">import</span> <span class="n">readligo</span> <span class="k">as</span> <span class="n">rl</span>
-<span class="kn">from</span> <span class="nn">ligotools</span> <span class="kn">import</span> <span class="n">utils</span> <span class="k">as</span> <span class="n">ut</span>
 
 <span class="c1"># you might get a matplotlib warning here; you can ignore it.</span>
 </pre></div>
